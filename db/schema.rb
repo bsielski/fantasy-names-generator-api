@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914153003) do
+ActiveRecord::Schema.define(version: 20170914162711) do
 
   create_table "groups", force: :cascade do |t|
     t.string "label", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "subgroups_count"
   end
 
   create_table "names", force: :cascade do |t|
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170914153003) do
     t.string "variant_separator", default: ",", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "names_count"
     t.index ["subgroup_id"], name: "index_namesets_on_subgroup_id"
   end
 
@@ -44,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170914153003) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "namesets_count"
     t.index ["group_id"], name: "index_subgroups_on_group_id"
   end
 
