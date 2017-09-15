@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915145612) do
+ActiveRecord::Schema.define(version: 20170915151412) do
 
   create_table "groups", force: :cascade do |t|
     t.string "label", null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170915145612) do
     t.integer "subgroup_id"
     t.integer "position"
     t.string "label", null: false
-    t.string "source"
+    t.text "source"
     t.string "name_separator", default: ";", null: false
     t.string "variant_separator", default: ",", null: false
     t.datetime "created_at", null: false

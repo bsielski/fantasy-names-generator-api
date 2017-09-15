@@ -4,7 +4,7 @@ Nameset model
 | label              | string  |
 | subgroup           | ref     |
 | position           | integer |
-| source             | string  |
+| source             | text  |
 | name_separator     | string  |
 | variant_separator  | string  |
 
