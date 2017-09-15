@@ -11,6 +11,7 @@ RSpec.describe "Nameset", type: :model do
   end
 
   describe "#label" do
+
     context "when it's blank" do
       it "is invalid" do
         subject.label = ''
@@ -54,9 +55,11 @@ RSpec.describe "Nameset", type: :model do
         expect(subject.reload.label).to eq "The Example Label"
       end
     end
+
   end
 
   describe "#subgroup" do
+
     context "when it's nil" do
       it "is invalid" do
         subject.subgroup = nil
@@ -69,6 +72,54 @@ RSpec.describe "Nameset", type: :model do
         expect(subject).to be_valid
       end
     end
+
+  end
+
+  describe "#name_separator" do
+
+    context "when it's nil" do
+      it "it is \';\'as default" do
+        subject.save
+        expect(subject.reload.name_separator).to eq ";"
+      end
+      it "is valid" do
+        expect(subject).to be_valid
+      end
+    end
+    context "when it's blank" do
+      it "it is \';\'as default" do
+        subject.save
+        expect(subject.reload.name_separator).to eq ";"
+      end
+      it "is valid" do
+        expect(subject).to be_valid
+      end
+    end
+
+  end
+
+  describe "#variant_separator" do
+
+    context "when it's nil" do
+      it "it is \',\'as default" do
+        subject.save
+        expect(subject.reload.variant_separator).to eq ","
+      end
+      it "is valid" do
+        expect(subject).to be_valid
+      end
+    end
+    context "when it's blank" do
+      it "it is \',\'as default" do
+        subject.save
+        expect(subject.reload.variant_separator).to eq ","
+      end
+      it "is valid" do
+        expect(subject).to be_valid
+      end
+
+    end
+
   end
 
 
