@@ -11,7 +11,7 @@ Nameset model
 Name model
 | attribute | type   |
 |-----------+--------|
-| variants  | string |
+| variants  | text |
 | nameset   | ref    |
 | position  | integer |
 
