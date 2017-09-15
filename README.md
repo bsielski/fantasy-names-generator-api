@@ -13,6 +13,7 @@ Name model
 |-----------+--------|
 | variants  | string |
 | nameset   | ref    |
+| position  | integer |
 
 SubGroup model
 | attribute | type    |
