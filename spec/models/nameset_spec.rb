@@ -46,7 +46,6 @@ RSpec.describe "Nameset", type: :model do
         expect(subject.reload.label).to eq ("a" * 60)
       end
     end
-
     context "when it has whitespaces characters between words" do
       it "they are changed to single spaces before validation" do
         subject.label = "The  \t\n  Example   \n  \t  Label"
@@ -55,7 +54,22 @@ RSpec.describe "Nameset", type: :model do
         expect(subject.reload.label).to eq "The Example Label"
       end
     end
-
   end
+
+  describe "#subgroup" do
+    context "when it's nil" do
+      it "is invalid" do
+        subject.subgroup = nil
+        expect(subject).to be_invalid
+        expect(subject.errors[:subgroup]).to include("must exist")
+      end
+    end
+    context "when it's correct" do
+      it "is valid" do
+        expect(subject).to be_valid
+      end
+    end
+  end
+
 
 end
