@@ -68,8 +68,17 @@ RSpec.describe "Group", type: :model do
         subject.save
         expect(subject.reload.position).to be_instance_of Integer
       end
-
     end
+    context "when new object is creating with position nil" do
+      it "has the last position" do
+        subject.save
+        expect(subject.position).to eq Group.count
+        Group.create!(label: "Second Group")
+        expect(Group.last.position).to eq Group.count
+      end
+    end
+
+
 
   end
 
