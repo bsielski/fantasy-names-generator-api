@@ -1,9 +1,12 @@
 class Group < ApplicationRecord
+  has_many :subgroups
   before_validation :normalize_label
   acts_as_list
-  
+
   validates :label, length: { maximum: 100 }
   validates :label, presence: true
+
+  scope :with_subgroups, -> { where("subgroups_count > '0'") }
 
   private
 
@@ -18,5 +21,7 @@ class Group < ApplicationRecord
     result = result.strip
     result
   end
+
+
 
 end
