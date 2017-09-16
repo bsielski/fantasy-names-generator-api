@@ -56,15 +56,15 @@ RSpec.describe "Group", type: :model do
     end
     context "when 2 of 3 are not empty" do
       it "returns 2 objects" do
-        expect(Group.with_empties(false).size).to eq 3
-        expect(Group.with_empties(true).size).to eq 2
+        expect(Group.with_empties(true).size).to eq 3
+        expect(Group.with_empties(false).size).to eq 2
       end
     end
     context "when 2 of 4 are not empty" do
       it "returns 2 objects" do
         Group.create!(label: "Another Empty Group")
-        expect(Group.with_empties(false).size).to eq 4
-        expect(Group.with_empties(true).size).to eq 2
+        expect(Group.with_empties(true).size).to eq 4
+        expect(Group.with_empties(false).size).to eq 2
       end
     end
 

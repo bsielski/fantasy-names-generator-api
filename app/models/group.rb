@@ -12,7 +12,7 @@ class Group < ApplicationRecord
     p bool.class
     puts
     puts
-    where("subgroups_count > '0'") if bool
+    where("subgroups_count > '0'") unless bool
   end
 
   private
