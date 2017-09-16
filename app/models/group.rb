@@ -7,11 +7,6 @@ class Group < ApplicationRecord
   validates :label, presence: true
 
   scope :with_empties, ->(bool) do
-    puts
-    puts
-    p bool.class
-    puts
-    puts
     where("subgroups_count > '0'") unless bool
   end
 
