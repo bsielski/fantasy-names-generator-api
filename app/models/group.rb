@@ -6,7 +6,9 @@ class Group < ApplicationRecord
   validates :label, length: { maximum: 100 }
   validates :label, presence: true
 
-  scope :with_subgroups, -> { where("subgroups_count > '0'") }
+  scope :only_with_subgroups, ->(bool) do
+    where("subgroups_count > '0'") if bool
+  end
 
   private
 
