@@ -8,7 +8,7 @@ RSpec.describe "Group", type: :model do
     )
   end
 
-  describe "#label", type: :model do
+  describe "#label" do
 
     context "when it's blank" do
       it "is invalid" do
@@ -52,6 +52,23 @@ RSpec.describe "Group", type: :model do
         subject.save
         expect(subject.reload.label).to eq "The Example Label"
       end
+    end
+
+  end
+
+  describe "#position" do
+
+    context "when it's nil" do
+      it "is valid" do
+        subject.position = nil
+        expect(subject).to be_valid
+      end
+      it "is changed to integer after save" do
+        subject.position = nil
+        subject.save
+        expect(subject.reload.position).to be_instance_of Integer
+      end
+
     end
 
   end

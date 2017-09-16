@@ -1,6 +1,7 @@
 class Group < ApplicationRecord
   before_validation :normalize_label
-
+  acts_as_list
+  
   validates :label, length: { maximum: 100 }
   validates :label, presence: true
 
