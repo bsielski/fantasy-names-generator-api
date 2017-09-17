@@ -8,7 +8,8 @@ RSpec.describe "Group", type: :model do
     )
   end
 
-  describe "::with_empties" do
+  describe "scopes" do
+
     before :context do
       g1 = Group.create!(label: "Traditional Celtic names")
       g1a = Subgroup.create!(group: g1)
@@ -54,21 +55,24 @@ RSpec.describe "Group", type: :model do
       Subgroup.destroy_all
       Group.destroy_all
     end
-    context "when 2 of 3 are not empty" do
-      it "returns 2 objects" do
-        expect(Group.with_empties(true).size).to eq 3
-        expect(Group.with_empties(false).size).to eq 2
+
+    describe "::with_empties" do
+      context "when 2 of 3 are not empty" do
+        it "returns 2 objects" do
+          expect(Group.with_empties(true).size).to eq 3
+          expect(Group.with_empties(false).size).to eq 2
+        end
       end
-    end
-    context "when 2 of 4 are not empty" do
-      it "returns 2 objects" do
-        Group.create!(label: "Another Empty Group")
-        expect(Group.with_empties(true).size).to eq 4
-        expect(Group.with_empties(false).size).to eq 2
+      context "when 2 of 4 are not empty" do
+        it "returns 2 objects" do
+          Group.create!(label: "Another Empty Group")
+          expect(Group.with_empties(true).size).to eq 4
+          expect(Group.with_empties(false).size).to eq 2
+        end
       end
     end
 
-  end
+  end #end of scopes
 
   describe "#label" do
 
@@ -139,8 +143,6 @@ RSpec.describe "Group", type: :model do
         expect(Group.last.position).to eq Group.count
       end
     end
-
-
 
   end
 
