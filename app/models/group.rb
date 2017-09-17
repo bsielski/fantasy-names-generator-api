@@ -7,7 +7,7 @@ class Group < ApplicationRecord
   validates :label, presence: true
 
   scope :with_empties, ->(bool) do
-    where("subgroups_count > '0'") unless bool
+    where("subgroups_count > '0'") unless ActiveModel::Type::Boolean.new.cast(bool)
   end
 
   private
