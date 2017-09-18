@@ -1,6 +1,5 @@
 class Group < ApplicationRecord
   has_many :subgroups
-  has_many :namesets, through: :subgroups
   before_validation :normalize_label
   acts_as_list
 
@@ -9,10 +8,6 @@ class Group < ApplicationRecord
 
   scope :with_empties, ->(bool) do
     where("subgroups_count > '0'") unless ActiveModel::Type::Boolean.new.cast(bool)
-  end
-
-  def as_json
-    ActiveModelSerializers::SerializableResource.new(self, {}).as_json
   end
 
   private
