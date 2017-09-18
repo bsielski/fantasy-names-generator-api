@@ -1,5 +1,6 @@
 class Nameset < ApplicationRecord
   belongs_to :subgroup, counter_cache: true
+  has_many :names
   acts_as_list scope: :subgroup
 
   before_validation :normalize_label
