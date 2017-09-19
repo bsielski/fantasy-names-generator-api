@@ -41,4 +41,3 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "mina"
 gem 'acts_as_list'
-gem 'active_model_serializers', '~> 0.10.0'
