@@ -1,14 +1,11 @@
 class Group < ApplicationRecord
-  has_many :subgroups
   before_validation :normalize_label
+
+  has_many :subgroups
   acts_as_list
 
   validates :label, length: { maximum: 100 }
   validates :label, presence: true
-
-  scope :with_empties, ->(bool) do
-    where("subgroups_count > '0'") unless ActiveModel::Type::Boolean.new.cast(bool)
-  end
 
   private
 
@@ -17,7 +14,6 @@ class Group < ApplicationRecord
       self.label = normalize_whitespaces(self.label)
     end
   end
-
 
   def normalize_whitespaces(string)
     result = string.gsub(/\s+/, " ")
