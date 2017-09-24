@@ -1,4 +1,4 @@
 class Api::V1::NameResource < JSONAPI::Resource
-  attributes :position, :variants
+  attributes :nameset_id, :position, :variants
   belongs_to :nameset
 end

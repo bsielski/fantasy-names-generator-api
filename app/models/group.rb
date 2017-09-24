@@ -2,6 +2,7 @@ class Group < ApplicationRecord
   before_validation :normalize_label
 
   has_many :subgroups
+
   acts_as_list
 
   validates :label, length: { maximum: 100 }
