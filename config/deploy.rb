@@ -71,11 +71,11 @@ task :deploy do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    # invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     on :launch do
-      # command "sudo service #{fetch(:user)} restart"
+      command "sudo service #{fetch(:user)} restart"
     end
   end
 
