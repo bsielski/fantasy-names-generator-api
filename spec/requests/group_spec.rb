@@ -51,16 +51,16 @@ RSpec.describe "Group API", type: :request do
     Group.destroy_all
   end
 
-  describe 'GET /groups' do
-    before { get '/groups' }
+  describe 'GET /api/v1/groups' do
+    before { get '/api/v1/groups' }
     it 'returns 3 objects' do
-      expect(JSON.parse(response.body).size).to eq(3)
+      expect(JSON.parse(response.body)["data"].size).to eq(3)
     end
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
     it 'returns json response type' do
-      expect(response.content_type).to eq("application/json")
+      expect(response.content_type).to eq("application/vnd.api+json")
     end
   end
 
