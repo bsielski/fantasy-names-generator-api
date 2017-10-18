@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915151412) do
+ActiveRecord::Schema.define(version: 20171018150929) do
 
   create_table "groups", force: :cascade do |t|
     t.string "label", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170915151412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "subgroups_count"
+    t.boolean "custom", default: false
   end
 
   create_table "names", force: :cascade do |t|

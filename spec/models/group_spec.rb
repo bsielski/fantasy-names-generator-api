@@ -126,4 +126,27 @@ RSpec.describe "Group", type: :model do
 
   end
 
+
+  describe "#custom" do
+
+    context "when it's not set" do
+      it "is false by dfault" do
+        subject.save
+        expect(subject.reload.custom).to eq false
+      end
+      it "is valid" do
+        expect(subject).to be_valid
+      end
+    end
+
+    context "when it's true" do
+      it "is valid" do
+        subject.custom = true
+        expect(subject).to be_valid
+      end
+    end
+
+
+  end
+
 end
