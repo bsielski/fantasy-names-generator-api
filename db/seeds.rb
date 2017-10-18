@@ -234,3 +234,19 @@ Name.create!(nameset: ns6a1, variants: "Energeia")
 Name.create!(nameset: ns6a1, variants: "Arche")
 Name.create!(nameset: ns6a1, variants: "Nemesis")
 Name.create!(nameset: ns6a1, variants: "Psyche")
+
+g7 = Group.create!(label: "Custom 1", custom: true)
+
+g7a = Subgroup.create!(group: g7)
+ns7a1 = Nameset.create!(label: "Type some names here", subgroup: g7a)
+Name.create!(nameset: ns7a1, variants: "Some")
+Name.create!(nameset: ns7a1, variants: "Example")
+Name.create!(nameset: ns7a1, variants: "Words")
+
+g8 = Group.create!(label: "Custom 1", custom: true)
+
+g8a = Subgroup.create!(group: g8)
+ns8a1 = Nameset.create!(label: "Type some names here", subgroup: g8a)
+Name.create!(nameset: ns8a1, variants: "Another")
+Name.create!(nameset: ns8a1, variants: "Custom")
+Name.create!(nameset: ns8a1, variants: "Names")
