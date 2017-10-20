@@ -243,7 +243,7 @@ Name.create!(nameset: ns7a1, variants: "Some")
 Name.create!(nameset: ns7a1, variants: "Example")
 Name.create!(nameset: ns7a1, variants: "Words")
 
-g8 = Group.create!(label: "Custom 1", custom: true)
+g8 = Group.create!(label: "Custom 2", custom: true)
 
 g8a = Subgroup.create!(group: g8)
 ns8a1 = Nameset.create!(label: "Type some names here", subgroup: g8a)
