@@ -7,233 +7,184 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require Rails.root.join("lib", "seeds", "scottish-male.rb")
+require Rails.root.join("lib", "seeds", "irish-male.rb")
+require Rails.root.join("lib", "seeds", "welsh-male.rb")
+require Rails.root.join("lib", "seeds", "scottish-female.rb")
+require Rails.root.join("lib", "seeds", "irish-female.rb")
+require Rails.root.join("lib", "seeds", "welsh-female.rb")
+
+require Rails.root.join("lib", "seeds", "anglo-saxon-male.rb")
+require Rails.root.join("lib", "seeds", "frankish-male.rb")
+require Rails.root.join("lib", "seeds", "gothic-male.rb")
+require Rails.root.join("lib", "seeds", "norse-male.rb")
+require Rails.root.join("lib", "seeds", "frankish-female.rb")
+require Rails.root.join("lib", "seeds", "anglo-saxon-female.rb")
+require Rails.root.join("lib", "seeds", "gothic-female.rb")
+require Rails.root.join("lib", "seeds", "norse-female.rb")
+
+require Rails.root.join("lib", "seeds", "finnish-male.rb")
+require Rails.root.join("lib", "seeds", "japanese-male.rb")
+require Rails.root.join("lib", "seeds", "indian-male.rb")
+require Rails.root.join("lib", "seeds", "finnish-female.rb")
+require Rails.root.join("lib", "seeds", "japanese-female.rb")
+require Rails.root.join("lib", "seeds", "indian-female.rb")
+
+require Rails.root.join("lib", "seeds", "angels-in-judaism-and-christianity.rb")
+require Rails.root.join("lib", "seeds", "greek-mythology-male.rb")
+require Rails.root.join("lib", "seeds", "demons.rb")
+require Rails.root.join("lib", "seeds", "angels-in-islam.rb")
+require Rails.root.join("lib", "seeds", "greek-mythology-female.rb")
+
+require Rails.root.join("lib", "seeds", "countries.rb")
+require Rails.root.join("lib", "seeds", "middle-earth-regions.rb")
+
+require Rails.root.join("lib", "seeds", "ancient-greek-philosophical-concepts.rb")
+
 @g1 = Group.create!(label: "Traditional Celtic names")
 
 @g1a = Subgroup.create!(group: @g1)
 @n1a1 = Nameset.create!(label: "Scottish male", subgroup: @g1a)
-Name.create!(nameset: @n1a1, variants: "Boisil")
-Name.create!(nameset: @n1a1, variants: "Feargan")
-Name.create!(nameset: @n1a1, variants: "Taran")
-Name.create!(nameset: @n1a1, variants: "Breannan")
-Name.create!(nameset: @n1a1, variants: "Fionghan")
-Name.create!(nameset: @n1a1, variants: "Scotaidh")
+Name.create!(
+  ScottishMale::NAMES.map do |variants| {nameset: @n1a1, variants: variants, position: 1,} end
+)
 @n1a2 = Nameset.create!(label: "Irish male", subgroup: @g1a)
-Name.create!(nameset: @n1a2, variants: "Seanán")
-Name.create!(nameset: @n1a2, variants: "Iarlugh")
-Name.create!(nameset: @n1a2, variants: "Meallán")
-Name.create!(nameset: @n1a2, variants: "Caoimhín")
-Name.create!(nameset: @n1a2, variants: "Molaisse")
-Name.create!(nameset: @n1a2, variants: "Uaithne")
+Name.create!(
+  IrishMale::NAMES.map do |variants| {nameset: @n1a2, variants: variants, position: 2,} end
+)
 @n1a3 = Nameset.create!(label: "Welsh male", subgroup: @g1a)
-Name.create!(nameset: @n1a3, variants: "Angwyn")
-Name.create!(nameset: @n1a3, variants: "Bryngwyn")
-Name.create!(nameset: @n1a3, variants: "Maelmadog")
-Name.create!(nameset: @n1a3, variants: "Cawrdaf")
-Name.create!(nameset: @n1a3, variants: "Colwyn")
-Name.create!(nameset: @n1a3, variants: "Rhydwyn")
+Name.create!(
+  WelshMale::NAMES.map do |variants| {nameset: @n1a3, variants: variants, position: 3,} end
+)
 
 @g1b = Subgroup.create!(group: @g1)
 @n1b1 = Nameset.create!(label: "Scottish female", subgroup: @g1b)
-Name.create!(nameset: @n1b1, variants: "Brianag")
-Name.create!(nameset: @n1b1, variants: "Fionnghuala")
-Name.create!(nameset: @n1b1, variants: "Muireall")
-Name.create!(nameset: @n1b1, variants: "Gormal")
-Name.create!(nameset: @n1b1, variants: "Greudach")
-Name.create!(nameset: @n1b1, variants: "Sorcha")
+Name.create!(
+  ScottishFemale::NAMES.map do |variants| {nameset: @n1b1, variants: variants, position: 3,} end
+)
 @n1b2 = Nameset.create!(label: "Irish female", subgroup: @g1b)
-Name.create!(nameset: @n1b2, variants: "Deirdre")
-Name.create!(nameset: @n1b2, variants: "Muireann")
-Name.create!(nameset: @n1b2, variants: "Sláine")
-Name.create!(nameset: @n1b2, variants: "Fianait")
-Name.create!(nameset: @n1b2, variants: "Éibhleann")
-Name.create!(nameset: @n1b2, variants: "Coinneach")
+Name.create!(
+  IrishFemale::NAMES.map do |variants| {nameset: @n1b2, variants: variants, position: 2,} end
+)
 @n1b3 = Nameset.create!(label: "Welsh female", subgroup: @g1b)
-Name.create!(nameset: @n1b3, variants: "Arwen")
-Name.create!(nameset: @n1b3, variants: "Gwen")
-Name.create!(nameset: @n1b3, variants: "Morwen")
-Name.create!(nameset: @n1b3, variants: "Briallen")
-Name.create!(nameset: @n1b3, variants: "Hafwen")
-Name.create!(nameset: @n1b3, variants: "Tegan")
+Name.create!(
+  WelshFemale::NAMES.map do |variants| {nameset: @n1b3, variants: variants, position: 1,} end
+)
 
 g2 = Group.create!(label: "Traditional Germanic names")
 
 g2a = Subgroup.create!(group: g2)
 ns2a1 = Nameset.create!(label: "Anglo-Saxon male", subgroup: g2a)
-Name.create!(nameset: ns2a1, variants: "Adulf")
-Name.create!(nameset: ns2a1, variants: "Ulfbehrt")
-Name.create!(nameset: ns2a1, variants: "Sigeric")
-Name.create!(nameset: ns2a1, variants: "Aelfhelm")
-Name.create!(nameset: ns2a1, variants: "Athelmod")
-Name.create!(nameset: ns2a1, variants: "Regnheah")
+Name.create!(
+  AngloSaxonMale::NAMES.map do |variants| {nameset: ns2a1, variants: variants, position: 1,} end
+)
 ns2a2 = Nameset.create!(label: "Frankish male", subgroup: g2a)
-Name.create!(nameset: ns2a2, variants: "Einhard")
-Name.create!(nameset: ns2a2, variants: "Nordbert")
-Name.create!(nameset: ns2a2, variants: "Wulfram")
-Name.create!(nameset: ns2a2, variants: "Fardulf")
-Name.create!(nameset: ns2a2, variants: "Hunald")
-Name.create!(nameset: ns2a2, variants: "Wandrille")
+Name.create!(
+  FrankishMale::NAMES.map do |variants| {nameset: ns2a2, variants: variants, position: 2,} end
+)
 ns2a3 = Nameset.create!(label: "Gothic male", subgroup: g2a)
-Name.create!(nameset: ns2a3, variants: "Ermanaric")
-Name.create!(nameset: ns2a3, variants: "Sidimund")
-Name.create!(nameset: ns2a3, variants: "Totila")
-Name.create!(nameset: ns2a3, variants: "Heldefredus")
-Name.create!(nameset: ns2a3, variants: "Sigeric")
-Name.create!(nameset: ns2a3, variants: "Walahmar")
+Name.create!(
+  GothicMale::NAMES.map do |variants| {nameset: ns2a3, variants: variants, position: 3,} end
+)
 ns2a4 = Nameset.create!(label: "Norse male", subgroup: g2a)
-Name.create!(nameset: ns2a4, variants: "Ivar")
-Name.create!(nameset: ns2a4, variants: "Ulf")
-Name.create!(nameset: ns2a4, variants: "Thrand")
-Name.create!(nameset: ns2a4, variants: "Biari")
-Name.create!(nameset: ns2a4, variants: "Endridi")
-Name.create!(nameset: ns2a4, variants: "Gunnlaug")
+Name.create!(
+  NorseMale::NAMES.map do |variants| {nameset: ns2a4, variants: variants, position: 4,} end
+)
 
 g2b = Subgroup.create!(group: g2)
 ns2b1 = Nameset.create!(label: "Anglo-Saxon female", subgroup: g2b)
-Name.create!(nameset: ns2b1, variants: "Begilda")
-Name.create!(nameset: ns2b1, variants: "Herburga")
-Name.create!(nameset: ns2b1, variants: "Wendreda")
-Name.create!(nameset: ns2b1, variants: "Tonild")
-Name.create!(nameset: ns2b1, variants: "Heahthryth")
-Name.create!(nameset: ns2b1, variants: "Alfrun")
+Name.create!(
+  AngloSaxonFemale::NAMES.map do |variants| {nameset: ns2b1, variants: variants, position: 3,} end
+)
 ns2b2 = Nameset.create!(label: "Frankish female", subgroup: g2b)
-Name.create!(nameset: ns2b2, variants: "Bertha")
-Name.create!(nameset: ns2b2, variants: "Hildegarde")
-Name.create!(nameset: ns2b2, variants: "Oda")
-Name.create!(nameset: ns2b2, variants: "Ansgard")
-Name.create!(nameset: ns2b2, variants: "Fara")
-Name.create!(nameset: ns2b2, variants: "Rotrude")
+Name.create!(
+  FrankishFemale::NAMES.map do |variants| {nameset: ns2b2, variants: variants, position: 2,} end
+)
 ns2b3 = Nameset.create!(label: "Gothic female", subgroup: g2b)
-Name.create!(nameset: ns2b3, variants: "Helchen")
-Name.create!(nameset: ns2b3, variants: "Erelieva")
-Name.create!(nameset: ns2b3, variants: "Sunigilda")
-Name.create!(nameset: ns2b3, variants: "Chlotsuintha")
-Name.create!(nameset: ns2b3, variants: "Ostrogotho")
-Name.create!(nameset: ns2b3, variants: "Valdamerca")
+Name.create!(
+  GothicFemale::NAMES.map do |variants| {nameset: ns2b3, variants: variants, position: 1,} end
+)
 ns2b4 = Nameset.create!(label: "Norse female", subgroup: g2b)
-Name.create!(nameset: ns2b4, variants: "Astrid")
-Name.create!(nameset: ns2b4, variants: "Halldora")
-Name.create!(nameset: ns2b4, variants: "Thola")
-Name.create!(nameset: ns2b4, variants: "Frida")
-Name.create!(nameset: ns2b4, variants: "Hildigunnr")
-Name.create!(nameset: ns2b4, variants: "Ulfhild")
+Name.create!(
+  NorseFemale::NAMES.map do |variants| {nameset: ns2b4, variants: variants, position: 4,} end
+)
 
 g3 = Group.create!(label: "Other traditional names")
 
 g3a = Subgroup.create!(group: g3)
 ns3a1 = Nameset.create!(label: "Finnish male", subgroup: g3a)
-Name.create!(nameset: ns3a1, variants: "Ilkka")
-Name.create!(nameset: ns3a1, variants: "Pellervo")
-Name.create!(nameset: ns3a1, variants: "Varma")
-Name.create!(nameset: ns3a1, variants: "Runo")
-Name.create!(nameset: ns3a1, variants: "Touko")
-Name.create!(nameset: ns3a1, variants: "Viljo")
+Name.create!(
+  FinnishMale::NAMES.map do |variants| {nameset: ns3a1, variants: variants, position: 1,} end
+)
 ns3a2 = Nameset.create!(label: "Japanese male", subgroup: g3a)
-Name.create!(nameset: ns3a2, variants: "Haruki")
-Name.create!(nameset: ns3a2, variants: "Naoki")
-Name.create!(nameset: ns3a2, variants: "Takeshi")
-Name.create!(nameset: ns3a2, variants: "Sho")
-Name.create!(nameset: ns3a2, variants: "Naomi")
-Name.create!(nameset: ns3a2, variants: "Katashi")
+Name.create!(
+  JapaneseMale::NAMES.map do |variants| {nameset: ns3a2, variants: variants, position: 2,} end
+)
 ns3a3 = Nameset.create!(label: "Indian male", subgroup: g3a)
-Name.create!(nameset: ns3a3, variants: "Abhijvala")
-Name.create!(nameset: ns3a3, variants: "Drsadvata")
-Name.create!(nameset: ns3a3, variants: "Srinivas")
-Name.create!(nameset: ns3a3, variants: "Ambastha")
-Name.create!(nameset: ns3a3, variants: "Debabrata")
-Name.create!(nameset: ns3a3, variants: "Brijesh")
+Name.create!(
+  IndianMale::NAMES.map do |variants| {nameset: ns3a3, variants: variants, position: 3,} end
+)
 
 g3b = Subgroup.create!(group: g3)
 ns3b1 = Nameset.create!(label: "Finnish female", subgroup: g3b)
-Name.create!(nameset: ns3b1, variants: "Kaisla")
-Name.create!(nameset: ns3b1, variants: "Mervi")
-Name.create!(nameset: ns3b1, variants: "Ulpukka")
-Name.create!(nameset: ns3b1, variants: "Kaste")
-Name.create!(nameset: ns3b1, variants: "Sorea")
-Name.create!(nameset: ns3b1, variants: "Kaarna")
+Name.create!(
+  FinnishFemale::NAMES.map do |variants| {nameset: ns3b1, variants: variants, position: 3,} end
+)
 ns3b2 = Nameset.create!(label: "Japanese female", subgroup: g3b)
-Name.create!(nameset: ns3b2, variants: "Emi")
-Name.create!(nameset: ns3b2, variants: "Mitsuko")
-Name.create!(nameset: ns3b2, variants: "Tamiko")
-Name.create!(nameset: ns3b2, variants: "Kanon")
-Name.create!(nameset: ns3b2, variants: "Sakura")
-Name.create!(nameset: ns3b2, variants: "Yuko")
+Name.create!(
+  JapaneseFemale::NAMES.map do |variants| {nameset: ns3b2, variants: variants, position: 2,} end
+)
 ns3b3 = Nameset.create!(label: "Indian female", subgroup: g3b)
-Name.create!(nameset: ns3b3, variants: "Astha")
-Name.create!(nameset: ns3b3, variants: "Kannika")
-Name.create!(nameset: ns3b3, variants: "Sumitra")
-Name.create!(nameset: ns3b3, variants: "Anantalakshmi")
-Name.create!(nameset: ns3b3, variants: "Harsi")
-Name.create!(nameset: ns3b3, variants: "Sneh")
+Name.create!(
+  IndianFemale::NAMES.map do |variants| {nameset: ns3b3, variants: variants, position: 1,} end
+)
 
 g4 = Group.create!(label: "Myths")
 
 g4a = Subgroup.create!(group: g4)
 ns4a1 = Nameset.create!(label: "Angels in Judaism and Christianity", subgroup: g4a)
-Name.create!(nameset: ns4a1, variants: "Abaddon")
-Name.create!(nameset: ns4a1, variants: "Imamiah")
-Name.create!(nameset: ns4a1, variants: "Lucifer")
-Name.create!(nameset: ns4a1, variants: "Metatron")
-Name.create!(nameset: ns4a1, variants: "Raphael")
-Name.create!(nameset: ns4a1, variants: "Uriel")
+Name.create!(
+  AngelsInJudaismAndChristianity::NAMES.map do |variants| {nameset: ns4a1, variants: variants, position: 1,} end
+)
 ns4a2 = Nameset.create!(label: "Demons", subgroup: g4a)
-Name.create!(nameset: ns4a2, variants: "Baal")
-Name.create!(nameset: ns4a2, variants: "Beelzebub")
-Name.create!(nameset: ns4a2, variants: "Belial")
-Name.create!(nameset: ns4a2, variants: "Demogorgon")
-Name.create!(nameset: ns4a2, variants: "Satan")
-Name.create!(nameset: ns4a2, variants: "Leviathan")
+Name.create!(
+  Demons::NAMES.map do |variants| {nameset: ns4a2, variants: variants, position: 2,} end
+)
 ns4a3 = Nameset.create!(label: "Greek mythology male", subgroup: g4a)
-Name.create!(nameset: ns4a3, variants: "Chaos")
-Name.create!(nameset: ns4a3, variants: "Uranus")
-Name.create!(nameset: ns4a3, variants: "Hyperion")
-Name.create!(nameset: ns4a3, variants: "Cronos")
-Name.create!(nameset: ns4a3, variants: "Zeus")
-Name.create!(nameset: ns4a3, variants: "Poseidon")
+Name.create!(
+  GreekMythologyMale::NAMES.map do |variants| {nameset: ns4a3, variants: variants, position: 3,} end
+)
+
 g4b = Subgroup.create!(group: g4)
 ns4b1 = Nameset.create!(label: "Angels in Islam", subgroup: g4b)
-Name.create!(nameset: ns4b1, variants: "Azazil")
-Name.create!(nameset: ns4b1, variants: "Jibrail")
-Name.create!(nameset: ns4b1, variants: "Malik")
-Name.create!(nameset: ns4b1, variants: "Munkar")
-Name.create!(nameset: ns4b1, variants: "Ridwan")
-Name.create!(nameset: ns4b1, variants: "Zabaniah")
+Name.create!(
+  AngelsInIslam::NAMES.map do |variants| {nameset: ns4b1, variants: variants, position: 1,} end
+)
 ns4b2 = Nameset.create!(label: "Greek mythology female", subgroup: g4b)
-Name.create!(nameset: ns4b2, variants: "Gaea")
-Name.create!(nameset: ns4b2, variants: "Mnemosyne")
-Name.create!(nameset: ns4b2, variants: "Theia")
-Name.create!(nameset: ns4b2, variants: "Euryphaessa")
-Name.create!(nameset: ns4b2, variants: "Phoebe")
-Name.create!(nameset: ns4b2, variants: "Hera")
+Name.create!(
+  GreekMythologyFemale::NAMES.map do |variants| {nameset: ns4b2, variants: variants, position: 2,} end
+)
 
 g5 = Group.create!(label: "Geographical names")
 
 g5a = Subgroup.create!(group: g5)
 ns5a1 = Nameset.create!(label: "Countries", subgroup: g5a)
-Name.create!(nameset: ns5a1, variants: "Albania")
-Name.create!(nameset: ns5a1, variants: "Ireland")
-Name.create!(nameset: ns5a1, variants: "Ethiopia")
-Name.create!(nameset: ns5a1, variants: "Zambia")
-Name.create!(nameset: ns5a1, variants: "Caledonia")
-Name.create!(nameset: ns5a1, variants: "Arabia")
+Name.create!(
+  Countries::NAMES.map do |variants| {nameset: ns5a1, variants: variants, position: 1,} end
+)
 g5b = Subgroup.create!(group: g5)
 ns5b1 = Nameset.create!(label: "Middle-earth regions", subgroup: g5b)
-Name.create!(nameset: ns5b1, variants: "Arthedain")
-Name.create!(nameset: ns5b1, variants: "Dorthonion")
-Name.create!(nameset: ns5b1, variants: "Forostar")
-Name.create!(nameset: ns5b1, variants: "Gondor")
-Name.create!(nameset: ns5b1, variants: "Lamedon")
-Name.create!(nameset: ns5b1, variants: "Norland")
+Name.create!(
+  MiddleEarthRegions::NAMES.map do |variants| {nameset: ns5b1, variants: variants, position: 1,} end
+)
 
 g6 = Group.create!(label: "Dictionary words")
 
 g6a = Subgroup.create!(group: g6)
 ns6a1 = Nameset.create!(label: "Ancient Greek philosophical concepts", subgroup: g6a)
-Name.create!(nameset: ns6a1, variants: "Megalopsychia")
-Name.create!(nameset: ns6a1, variants: "Nomos")
-Name.create!(nameset: ns6a1, variants: "Energeia")
-Name.create!(nameset: ns6a1, variants: "Arche")
-Name.create!(nameset: ns6a1, variants: "Nemesis")
-Name.create!(nameset: ns6a1, variants: "Psyche")
+Name.create!(
+  AncientGreekPhilosophicalConcepts::NAMES.map do |variants| {nameset: ns6a1, variants: variants, position: 1,} end
+)
 
 g7 = Group.create!(label: "Custom 1", custom: true)
 
