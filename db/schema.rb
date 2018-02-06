@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20171018150929) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "groups", force: :cascade do |t|
     t.string "label", null: false
     t.integer "position"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 20171018150929) do
   end
 
   create_table "names", force: :cascade do |t|
-    t.integer "nameset_id", null: false
+    t.bigint "nameset_id", null: false
     t.text "variants", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 20171018150929) do
   end
 
   create_table "namesets", force: :cascade do |t|
-    t.integer "subgroup_id"
+    t.bigint "subgroup_id"
     t.integer "position"
     t.string "label", null: false
     t.text "source"
@@ -45,7 +48,7 @@ ActiveRecord::Schema.define(version: 20171018150929) do
   end
 
   create_table "subgroups", force: :cascade do |t|
-    t.integer "group_id", null: false
+    t.bigint "group_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,4 +56,7 @@ ActiveRecord::Schema.define(version: 20171018150929) do
     t.index ["group_id"], name: "index_subgroups_on_group_id"
   end
 
+  add_foreign_key "names", "namesets"
+  add_foreign_key "namesets", "subgroups"
+  add_foreign_key "subgroups", "groups"
 end

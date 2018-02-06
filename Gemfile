@@ -17,9 +17,10 @@ gem 'puma', '~> 3.7'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'pg'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3'
   gem 'rspec-rails', '~> 3.6'
 
 end
@@ -33,7 +34,6 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
   gem 'unicorn'
 end
 
