@@ -1,0 +1,19 @@
+# version: "2"
+# services:
+#   db:
+#     image: postgres:10.1
+#     volumes:
+#       - postgres-data:/var/lib/postgresql/data
+#   api:
+#     build: .
+#     ports:
+#     - "3000:3000"
+#     volumes:
+#     - .:/usr/src/app
+#     env_file: .env
+#     stdin_open: true
+#     tty: true
+#     depends_on:
+#       - db
+# volumes:
+#   postgres-data:
