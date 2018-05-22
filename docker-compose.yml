@@ -1,19 +1,51 @@
-version: "2"
+version: "3"
 services:
   db:
     image: postgres:10.1
     volumes:
+      - ./docker/db_backups:/root/db_backups
       - postgres-data:/var/lib/postgresql/data
-  api:
-    build: .
-    ports:
-    - "3001:3000"
+  create-db:
+    build:
+      context: .
+      dockerfile: ./docker/build/Dockerfile
     volumes:
-    - .:/usr/src/app
-    env_file: .env
-    stdin_open: true
-    tty: true
+      - .:/usr/src/app
     depends_on:
       - db
+    command: ["bundle", "exec", "rake", "db:create"]
+  migrate:
+    build:
+      context: .
+      dockerfile: ./docker/build/Dockerfile
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+    command: ["bundle", "exec", "rake", "db:migrate"]
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/build/Dockerfile
+    expose:
+      - 3000
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+    command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+  proxy:
+    build:
+      context: .
+      dockerfile: ./docker/proxy/Dockerfile
+    expose:
+      - 80
+    environment:
+      VIRTUAL_HOST: fng.testingmagic.ovh
+      VIRTUAL_PORT: 3000
+networks:
+  default:
+    external:
+      name: nginx-proxy
 volumes:
   postgres-data:
