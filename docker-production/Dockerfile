@@ -12,7 +12,6 @@ RUN bundle install
 COPY . .
 
 ENV RAILS_ENV production
-#RUN ["bundle", "exec", "rails", "assets:precompile"]
 
 ENTRYPOINT ["./docker-production/entry-point.sh"]
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-P", "/tmp/puma.pid"]
