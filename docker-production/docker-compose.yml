@@ -19,8 +19,6 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     env_file: .env-webserver
-    expose:
-      - 8101
     networks:
       - rev-proxy
       - default
