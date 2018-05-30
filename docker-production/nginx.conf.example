@@ -1,0 +1,17 @@
+upstream rails_app {
+  server app:3000;
+}
+
+server {
+  listen 80;
+  server_name example.com www.example.com;
+
+  # Proxy request to rails app
+  location / {
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass_header Set-Cookie;
+    proxy_pass http://rails_app;
+  }
+
+}
