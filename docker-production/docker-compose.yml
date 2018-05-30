@@ -6,9 +6,6 @@ services:
     image: bsielski/fantasy-names-generator-api:1.0.0
     expose:
       - 3000
-    #volumes:
-      #- assets:/usr/share/nginx/html
-      #- configs:/etc/nginx/conf.d/default.conf
     env_file: ./.env-app
     networks:
       - net-pg
