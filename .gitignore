@@ -41,6 +41,9 @@
 # rbenv
 #.ruby-version
 
+Dockerfile
+docker-compose.yml
+
 .env
 .env-app
 .env-webserver
