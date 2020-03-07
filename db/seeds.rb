@@ -42,151 +42,72 @@ unless Group.first # because the db must be empty
   require Rails.root.join("lib", "seeds", "middle-earth-regions.rb")
   
   require Rails.root.join("lib", "seeds", "ancient-greek-philosophical-concepts.rb")
+
+
+  def insert_names(names_module, label, subgroup, position)
+    time = Time.now 
+    nameset = Nameset.create!(label: label, subgroup: subgroup)
+    names = names_module::NAMES.map do |variants|
+      {nameset_id: nameset.id, variants: variants, position: position, created_at: time, updated_at: time }
+    end
+    chunks = names.each_slice(300).to_a
+    chunks.each do |chunk|
+      Name.insert_all(chunk)
+    end
+  end
   
-  @g1 = Group.create!(label: "Traditional Celtic names")
-  
-  @g1a = Subgroup.create!(group: @g1)
-  @n1a1 = Nameset.create!(label: "Scottish male", subgroup: @g1a)
-  Name.create!(
-    ScottishMale::NAMES.map do |variants| {nameset: @n1a1, variants: variants, position: 1,} end
-  )
-  @n1a2 = Nameset.create!(label: "Irish male", subgroup: @g1a)
-  Name.create!(
-    IrishMale::NAMES.map do |variants| {nameset: @n1a2, variants: variants, position: 2,} end
-  )
-  @n1a3 = Nameset.create!(label: "Welsh male", subgroup: @g1a)
-  Name.create!(
-    WelshMale::NAMES.map do |variants| {nameset: @n1a3, variants: variants, position: 3,} end
-  )
-  
-  @g1b = Subgroup.create!(group: @g1)
-  @n1b1 = Nameset.create!(label: "Scottish female", subgroup: @g1b)
-  Name.create!(
-    ScottishFemale::NAMES.map do |variants| {nameset: @n1b1, variants: variants, position: 3,} end
-  )
-  @n1b2 = Nameset.create!(label: "Irish female", subgroup: @g1b)
-  Name.create!(
-    IrishFemale::NAMES.map do |variants| {nameset: @n1b2, variants: variants, position: 2,} end
-  )
-  @n1b3 = Nameset.create!(label: "Welsh female", subgroup: @g1b)
-  Name.create!(
-    WelshFemale::NAMES.map do |variants| {nameset: @n1b3, variants: variants, position: 1,} end
-  )
-  
+
+  g1 = Group.create!(label: "Traditional Celtic names")  
+  g1a = Subgroup.create!(group: g1)
+  insert_names(ScottishMale, "Scottish male", g1a, 1)
+  insert_names(IrishMale, "Irish male", g1a, 2)
+  insert_names(WelshMale, "Welsh male", g1a, 3)
+  g1b = Subgroup.create!(group: g1)
+  insert_names(ScottishFemale, "Scottish female", g1b, 3)
+  insert_names(IrishFemale, "Irish female", g1b, 2)
+  insert_names(WelshFemale, "Welsh female", g1b, 1)
+ 
   g2 = Group.create!(label: "Traditional Germanic names")
-  
   g2a = Subgroup.create!(group: g2)
-  ns2a1 = Nameset.create!(label: "Anglo-Saxon male", subgroup: g2a)
-  Name.create!(
-    AngloSaxonMale::NAMES.map do |variants| {nameset: ns2a1, variants: variants, position: 1,} end
-  )
-  ns2a2 = Nameset.create!(label: "Frankish male", subgroup: g2a)
-  Name.create!(
-    FrankishMale::NAMES.map do |variants| {nameset: ns2a2, variants: variants, position: 2,} end
-  )
-  ns2a3 = Nameset.create!(label: "Gothic male", subgroup: g2a)
-  Name.create!(
-    GothicMale::NAMES.map do |variants| {nameset: ns2a3, variants: variants, position: 3,} end
-  )
-  ns2a4 = Nameset.create!(label: "Norse male", subgroup: g2a)
-  Name.create!(
-    NorseMale::NAMES.map do |variants| {nameset: ns2a4, variants: variants, position: 4,} end
-  )
-  
+  insert_names(AngloSaxonMale, "Anglo-Saxon male", g2a, 1)
+  insert_names(FrankishMale, "Frankish male", g2a, 2)
+  insert_names(GothicMale, "Gothic male", g2a, 3)
+  insert_names(NorseMale, "Norse male", g2a, 4)
   g2b = Subgroup.create!(group: g2)
-  ns2b1 = Nameset.create!(label: "Anglo-Saxon female", subgroup: g2b)
-  Name.create!(
-    AngloSaxonFemale::NAMES.map do |variants| {nameset: ns2b1, variants: variants, position: 3,} end
-  )
-  ns2b2 = Nameset.create!(label: "Frankish female", subgroup: g2b)
-  Name.create!(
-    FrankishFemale::NAMES.map do |variants| {nameset: ns2b2, variants: variants, position: 2,} end
-  )
-  ns2b3 = Nameset.create!(label: "Gothic female", subgroup: g2b)
-  Name.create!(
-    GothicFemale::NAMES.map do |variants| {nameset: ns2b3, variants: variants, position: 1,} end
-  )
-  ns2b4 = Nameset.create!(label: "Norse female", subgroup: g2b)
-  Name.create!(
-    NorseFemale::NAMES.map do |variants| {nameset: ns2b4, variants: variants, position: 4,} end
-  )
-  
+  insert_names(AngloSaxonFemale, "Anglo-Saxon female", g2b, 3)
+  insert_names(FrankishFemale, "Frankish female", g2b, 2)
+  insert_names(GothicFemale, "Gothic female", g2b, 1)
+  insert_names(NorseFemale, "Norse female", g2b, 4)
+
   g3 = Group.create!(label: "Other traditional names")
-  
   g3a = Subgroup.create!(group: g3)
-  ns3a1 = Nameset.create!(label: "Finnish male", subgroup: g3a)
-  Name.create!(
-    FinnishMale::NAMES.map do |variants| {nameset: ns3a1, variants: variants, position: 1,} end
-  )
-  ns3a2 = Nameset.create!(label: "Japanese male", subgroup: g3a)
-  Name.create!(
-    JapaneseMale::NAMES.map do |variants| {nameset: ns3a2, variants: variants, position: 2,} end
-  )
-  ns3a3 = Nameset.create!(label: "Indian male", subgroup: g3a)
-  Name.create!(
-    IndianMale::NAMES.map do |variants| {nameset: ns3a3, variants: variants, position: 3,} end
-  )
-  
+  insert_names(FinnishMale, "Finnish male", g3a, 1)
+  insert_names(JapaneseMale, "Japanese male", g3a, 2)
+  insert_names(IndianMale, "Indian male", g3a, 3)
+
   g3b = Subgroup.create!(group: g3)
-  ns3b1 = Nameset.create!(label: "Finnish female", subgroup: g3b)
-  Name.create!(
-    FinnishFemale::NAMES.map do |variants| {nameset: ns3b1, variants: variants, position: 3,} end
-  )
-  ns3b2 = Nameset.create!(label: "Japanese female", subgroup: g3b)
-  Name.create!(
-    JapaneseFemale::NAMES.map do |variants| {nameset: ns3b2, variants: variants, position: 2,} end
-  )
-  ns3b3 = Nameset.create!(label: "Indian female", subgroup: g3b)
-  Name.create!(
-    IndianFemale::NAMES.map do |variants| {nameset: ns3b3, variants: variants, position: 1,} end
-  )
-  
+  insert_names(FinnishFemale, "Finnish female", g3b, 1)
+  insert_names(JapaneseFemale, "Japanese female", g3b, 2)
+  insert_names(IndianFemale, "Indian female", g3b, 3)
+
   g4 = Group.create!(label: "Myths")
-  
   g4a = Subgroup.create!(group: g4)
-  ns4a1 = Nameset.create!(label: "Angels in Judaism and Christianity", subgroup: g4a)
-  Name.create!(
-    AngelsInJudaismAndChristianity::NAMES.map do |variants| {nameset: ns4a1, variants: variants, position: 1,} end
-  )
-  ns4a2 = Nameset.create!(label: "Demons", subgroup: g4a)
-  Name.create!(
-    Demons::NAMES.map do |variants| {nameset: ns4a2, variants: variants, position: 2,} end
-  )
-  ns4a3 = Nameset.create!(label: "Greek mythology male", subgroup: g4a)
-  Name.create!(
-    GreekMythologyMale::NAMES.map do |variants| {nameset: ns4a3, variants: variants, position: 3,} end
-  )
-  
+  insert_names(AngelsInJudaismAndChristianity, "Angels in Judaism and Christianity", g4a, 1)
+  insert_names(Demons, "Demons", g4a, 2)
+  insert_names(GreekMythologyMale, "Greek mythology male", g4a, 3)
   g4b = Subgroup.create!(group: g4)
-  ns4b1 = Nameset.create!(label: "Angels in Islam", subgroup: g4b)
-  Name.create!(
-    AngelsInIslam::NAMES.map do |variants| {nameset: ns4b1, variants: variants, position: 1,} end
-  )
-  ns4b2 = Nameset.create!(label: "Greek mythology female", subgroup: g4b)
-  Name.create!(
-    GreekMythologyFemale::NAMES.map do |variants| {nameset: ns4b2, variants: variants, position: 2,} end
-  )
+  insert_names(AngelsInIslam, "Angels in Islam", g4b, 1)
+  insert_names(GreekMythologyFemale, "Greek mythology female", g4b, 2)
   
   g5 = Group.create!(label: "Geographical names")
-  
   g5a = Subgroup.create!(group: g5)
-  ns5a1 = Nameset.create!(label: "Countries", subgroup: g5a)
-  Name.create!(
-    Countries::NAMES.map do |variants| {nameset: ns5a1, variants: variants, position: 1,} end
-  )
+  insert_names(Countries, "Countries", g5a, 1)
   g5b = Subgroup.create!(group: g5)
-  ns5b1 = Nameset.create!(label: "Middle-earth regions", subgroup: g5b)
-  Name.create!(
-    MiddleEarthRegions::NAMES.map do |variants| {nameset: ns5b1, variants: variants, position: 1,} end
-  )
+  insert_names(MiddleEarthRegions, "Middle-earth regions", g5b, 1)
   
   g6 = Group.create!(label: "Dictionary words")
-  
   g6a = Subgroup.create!(group: g6)
-  ns6a1 = Nameset.create!(label: "Ancient Greek philosophical concepts", subgroup: g6a)
-  Name.create!(
-    AncientGreekPhilosophicalConcepts::NAMES.map do |variants| {nameset: ns6a1, variants: variants, position: 1,} end
-  )
+  insert_names(AncientGreekPhilosophicalConcepts, "Ancient Greek philosophical concepts", g6a, 1)
   
 else
   puts "The database is not empty. Nothing was seeded."
