@@ -1,9 +1,8 @@
-class CreateGroups < ActiveRecord::Migration[5.1]
+class CreateGroups < ActiveRecord::Migration[6.0]
   def change
     create_table :groups do |t|
-      t.string :label, null: false
+      t.string :label
       t.integer :position
-
       t.timestamps
     end
   end

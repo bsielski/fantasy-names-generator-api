@@ -10,48 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_192839) do
+ActiveRecord::Schema.define(version: 2020_03_08_163024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "groups", force: :cascade do |t|
-    t.string "label", null: false
+    t.string "label"
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.integer "subgroups_count"
   end
 
   create_table "names", force: :cascade do |t|
     t.bigint "nameset_id", null: false
-    t.text "variants", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "position"
+    t.text "variants"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["nameset_id"], name: "index_names_on_nameset_id"
     t.index ["position"], name: "index_names_on_position"
   end
 
   create_table "namesets", force: :cascade do |t|
-    t.bigint "subgroup_id"
+    t.bigint "subgroup_id", null: false
     t.integer "position"
-    t.string "label", null: false
+    t.string "label"
     t.text "source"
-    t.string "name_separator", default: ";", null: false
-    t.string "variant_separator", default: ",", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "name_separator"
+    t.string "variant_separator"
     t.integer "names_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["subgroup_id"], name: "index_namesets_on_subgroup_id"
   end
 
   create_table "subgroups", force: :cascade do |t|
     t.bigint "group_id", null: false
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "namesets_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_subgroups_on_group_id"
   end
 
