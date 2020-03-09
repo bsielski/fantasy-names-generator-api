@@ -54,6 +54,7 @@ unless Group.first # because the db must be empty
     chunks.each do |chunk|
       Name.insert_all(chunk)
     end
+    Nameset.reset_counters(nameset.id, :names)
   end
   
 
