@@ -26,7 +26,7 @@ module NewApp
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'fantasynamesgenerator.testingmagic.ovh', 'localhost:3000'
+        origins 'fantasynamesgenerator.testingmagic.ovh', 'localhost:3000', 'localhost:80', 'fng.localhost:3000', 'fng.localhost:80'
         resource '*', headers: :any, methods: :any
       end
     end
